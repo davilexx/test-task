@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-2.2</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- styles -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- main -->
+    <main class="main">
+      <div class="main__container container">
+        <!-- popup -->
+        <div class="main__popup popup"></div>
+        <div class="main__row row">
+          <!-- title -->
+          <h1 class="main__title">Время из A в B</h1>
+          <div class="main__route-time">
+            <!-- choose route -->
+            <div class="main__select-route">
+              <label class="main__label main__label_path" for="route"
+                >Выберите направление</label
+              >
+              <br />
+              <select class="main__select" name="route" id="route">
+                <option value="из A в B">из A в B</option>
+                <option value="из B в A">из B в A</option>
+                <option value="из A в B и обратно в А">
+                  из A в B и обратно в А
+                </option>
+              </select>
+            </div>
+            <!-- choose time -->
+            <div class="main__select-time" id="select-time">
+              <!-- from A to B -->
+              <div class="main__to-B">
+                <label class="main__label main__label_B" for="time-to-B"
+                  >Выберите время из A в B</label
+                >
+                <br />
+                <select class="main__select" name="time-to-B" id="time-to-B">
+                  <option value="15:00">15:00</option>
+                  <option value="15:30">15:30</option>
+                  <option value="15:45">15:45</option>
+                  <option value="16:00">16:00</option>
+                  <option value="16:15">16:15</option>
+                  <option value="18:00">18:00</option>
+                </select>
+              </div>
+              <!-- from B to A -->
+              <div class="main__to-A">
+                <label class="main__label main__label_A" for="time-to-A"
+                  >Выберите время из B в A</label
+                >
+                <br />
+                <select class="main__select" name="time-to-A" id="time-to-A">
+                  <option value="15:30">15:30</option>
+                  <option value="15:45">15:45</option>
+                  <option value="16:00">16:00</option>
+                  <option value="16:15">16:15</option>
+                  <option value="16:35">16:35</option>
+                  <option value="18:50">18:50</option>
+                  <option value="18:55">18:55</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- tickets -->
+          <div class="main__tickets tickets">
+            <h3 class="tickets__title">Выберите количество билетов</h3>
+            <p class="tickets__desc">Стоимость билета</p>
+            <p class="tickets__price">1000₽</p>
+            <label class="tickets__label" for="num">Количество билетов</label>
+            <br />
+            <div class="tickets__quantity">
+              <button class="tickets__btn tickets__btn_minus">-</button>
+              <input class="tickets__input" type="text" value="1" disabled />
+              <button class="tickets__btn tickets__btn_plus">+</button>
+            </div>
+            <br />
+            <button class="tickets__count-btn">Посчитать</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- scripts -->
+    <script src="js/moment.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
