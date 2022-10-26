@@ -1,17 +1,19 @@
 // convert time to user's timezone
-let getTime = moment().utc().toDate().toString();
-let getGMT = getTime.search("GMT");
-let GMT = getTime.slice(getGMT + 3, 33);
+// eslint-disable-next-line no-undef
+const momentTime = moment().utc().toDate().toString();
+const GMT = momentTime.search("GMT");
+const slicedGMT = momentTime.slice(GMT + 3, 33);
 
 // slice +/-, hours and minutes
-let earlierOrLater = GMT.slice(0, 1);
-let userTimezoneHours = Number(GMT.slice(1, 3));
-let userTimezoneMinutes = Number(GMT.slice(3));
+const earlierOrLater = slicedGMT.slice(0, 1);
+const userTimezoneHours = Number(slicedGMT.slice(1, 3));
+const userTimezoneMinutes = Number(slicedGMT.slice(3));
 
 const timeToBSelect = document.getElementById("time-to-B");
 const timeToASelect = document.getElementById("time-to-A");
 
 const getHours = (hours) => {
+  let formattedHours = "";
   if (hours === 24) {
     hours = 0;
   } else if (hours > 24) {
@@ -20,12 +22,14 @@ const getHours = (hours) => {
     hours = Math.abs(24 + hours);
   }
   if (hours.toString().length === 1) {
-    hours = `0${hours}`;
+    formattedHours = `0${hours}`;
+    return formattedHours;
   }
   return hours;
 };
 
 const getMinutes = (minutes) => {
+  let formattedMinutes = "";
   if (minutes === 60) {
     minutes = 0;
   } else if (minutes > 60) {
@@ -34,7 +38,8 @@ const getMinutes = (minutes) => {
     minutes = Math.abs(60 + minutes);
   }
   if (minutes.toString().length === 1) {
-    minutes = `0${minutes}`;
+    formattedMinutes = `0${minutes}`;
+    return formattedMinutes;
   }
   return minutes;
 };
@@ -42,7 +47,6 @@ const getMinutes = (minutes) => {
 const changeTime = (trip) => {
   for (let i = 0; i < trip.length; i++) {
     let optionValue = trip.options[i].value;
-    let optionText = trip.options[i].text;
 
     let optionHours = Number(optionValue.slice(0, 2));
     let optionMinutes = Number(optionValue.slice(3));
@@ -64,7 +68,6 @@ const changeTime = (trip) => {
       optionMinutes = getMinutes(optionMinutes);
 
       optionValue = `${optionHours}:${optionMinutes}`;
-      optionText = `${optionHours}:${optionMinutes}`;
     }
   }
 };
@@ -120,17 +123,17 @@ routeSelector.addEventListener("change", () => {
 
     // from A to B and to A solution
     const checkTime = () => {
-      let valueToB =
+      const valueToB =
         timeToBSelect.getElementsByTagName("option")[
           timeToBSelect.selectedIndex
         ].value;
-      let minutesToB = Number(valueToB.slice(3));
+      const minutesToB = Number(valueToB.slice(3));
 
-      let valueToA =
+      const valueToA =
         timeToASelect.getElementsByTagName("option")[
           timeToBSelect.selectedIndex + 1
         ].value;
-      let minutesToA = Number(valueToA.slice(3));
+      const minutesToA = Number(valueToA.slice(3));
 
       // check if difference between departure and arrival are not less than 50 minutes
       if (Math.abs(minutesToA - minutesToB) < 50) {
@@ -283,8 +286,8 @@ countBtn.addEventListener("click", () => {
   departureTimeFromBHours = getHours(departureTimeFromBHours);
 
   // final time
-  let arrivalTimeToB = `${departureTimeFromAHours}:${departureTimeFromAMinutes}`;
-  let arrivalTimeToA = `${departureTimeFromBHours}:${departureTimeFromBMinutes}`;
+  const arrivalTimeToB = `${departureTimeFromAHours}:${departureTimeFromAMinutes}`;
+  const arrivalTimeToA = `${departureTimeFromBHours}:${departureTimeFromBMinutes}`;
 
   // change the text based on selected options
   let tripTime = "";
@@ -293,7 +296,7 @@ countBtn.addEventListener("click", () => {
     tripTime = "в обе стороны по 50 минут";
     arrival = `
       Теплоход отправляется из A в ${departureTimeFromA}, а прибудет в B в ${arrivalTimeToB}.
-      <br>
+      <br><br>
       Затем теплоход отправляется из B в ${departureTimeFromB}, а прибудет в A в ${arrivalTimeToA}.
     `;
   } else if (routeSelector.value === "из B в A") {
